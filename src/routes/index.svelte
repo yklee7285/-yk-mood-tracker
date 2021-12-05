@@ -3,10 +3,12 @@
     import Entry from "$lib/Entry.svelte ";
     import EntryModal from "$lib/EntryModal.svelte";
     import supabase from '$lib/db';
+    import { goto } from '$app/navigation';
     async function signOut() {
    	 const { error } = await supabase.auth.signOut();
    	 if (error) alert(error.message); // alert if error
-    }
+        goto('/login');
+       }
     // Select entries
     async function getEntries() {
     const { data, error } = await supabase.from('moodEntries').select();
